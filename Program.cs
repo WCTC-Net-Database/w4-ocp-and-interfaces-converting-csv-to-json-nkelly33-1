@@ -11,8 +11,13 @@ class Program
 
     static void Main()
     {
-        string filePath = "input.csv"; // Default to CSV file
+        /*string filePath = "input.csv"; // Default to CSV file
         fileHandler = new CsvFileHandler(); // Default to CSV handler
+        characters = fileHandler.ReadCharacters(filePath);*/
+
+
+        string filePath = "input.json"; // Default to JSON file
+        fileHandler = new JsonFileHandler(); // Default to JSON handler 
         characters = fileHandler.ReadCharacters(filePath);
 
         while (true)
@@ -59,6 +64,25 @@ class Program
         // TODO: Implement logic to add a new character
         // Prompt for character details (name, class, level, hit points, equipment)
         // Add the new character to the characters list
+        Console.Write("Enter character name: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Enter character class: ");
+        string characterClass = Console.ReadLine();
+
+        Console.Write("Enter character level: ");
+        int level = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter character HP: ");
+        int hp = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter character equipment (comma separated): ");
+        List<string> equipment = Console.ReadLine().Split(',').Select(e => e.Trim()).ToList();
+
+        var newCharacter = new Character(name, characterClass, level, hp, equipment);
+
+        characters.Add(newCharacter);
+        Console.WriteLine("Character added successfully!");
     }
 
     static void LevelUpCharacter()
@@ -72,6 +96,10 @@ class Program
             // TODO: Implement logic to level up the character
             // character.Level++;
             // Console.WriteLine($"Character {character.Name} leveled up to level {character.Level}!");
+
+            character.Level++;
+            Console.WriteLine($"Character {character.Name} leveled up to level {character.Level}!");
+
         }
         else
         {
